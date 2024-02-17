@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  web:
+    build: .
+    volumes:
+      - .:/scrape
+    depends_on:
+      - db
+    container_name: scrape
+    tty: true
+  
+  
+  db:
+    image: postgres
+    volumes:
+      - /data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=scrape
+      - POSTGRES_USER=user 
+      - POSTGRES_PASSWORD=user 
+    container_name: db
+
