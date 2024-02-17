@@ -2,12 +2,23 @@ version: '3.8'
 services:
   web:
     build: .
+    image: app:django
     volumes:
       - .:/scrape
     depends_on:
       - db
     container_name: scrape
     tty: true
+    expose:
+    - "8000"
+    ports:
+      - 8000:8000
+    environment:
+      - POSTGRES_DB=scrape
+      - POSTGRES_USER=user 
+      - POSTGRES_PASSWORD=user 
+      - POSTGRES_HOST=db
+    command: python manage.py runserver 0.0.0.0:8000
   
   
   db:
@@ -18,5 +29,6 @@ services:
       - POSTGRES_DB=scrape
       - POSTGRES_USER=user 
       - POSTGRES_PASSWORD=user 
+      - POSTGRES_HOST=db
     container_name: db
 

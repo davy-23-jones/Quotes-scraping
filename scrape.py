@@ -12,7 +12,7 @@ class Scrape:
     def uploadDB(quote, author, tags):
         conn = psycopg2.connect(database = "scrape", user = "user", password = "user", host = "db")
         curr = conn.cursor()
-        curr.execute(f"insert into scrape(quote, author, tags) values (%s, %s, %s)", (quote, author, tags ))
+        curr.execute(f"insert into scraper_scrape(quote, author, tags) values (%s, %s, %s)", (quote, author, tags ))
         curr.close()
         conn.commit()
         conn.close()
